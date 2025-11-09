@@ -22,4 +22,5 @@ type CacheProvider string
 type Cache interface {
 	Add(context.Context, CacheItem) error
 	Get(context.Context, IdempotencyKey) (CacheItem, error)
+	Clear(context.Context) error
 }
