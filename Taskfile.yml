@@ -1,0 +1,22 @@
+version: "3"
+
+tasks:
+  tidy:
+    desc: Tidy up Go module dependencies
+    cmds:
+      - go mod tidy
+
+  generate:all:
+    desc: run go generate
+    cmds:
+      - go generate ./...
+
+  test:
+    desc: Run unit tests
+    cmds:
+      - go test -v ./...
+
+  go:lint:
+    desc: Run golangci-lint on the entire project (use CHANGED=true for changed files only)
+    cmds:
+      - golangci-lint run ./...

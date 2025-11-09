@@ -1,0 +1,74 @@
+version: "2"
+run:
+  modules-download-mode: readonly
+  tests: true
+  allow-parallel-runners: true
+linters:
+  enable:
+    - bodyclose
+    - gocritic
+    - gocyclo
+    - gosec
+    - misspell
+    - revive
+    - unconvert
+  settings:
+    gocritic:
+      disabled-checks:
+        - commentedOutCode
+        - evalOrder
+      enabled-tags:
+        - diagnostic
+        - performance
+        - style
+    gocyclo:
+      min-complexity: 15
+    gosec:
+      excludes:
+        - G404
+    revive:
+      rules:
+        - name: exported
+          disabled: true
+  exclusions:
+    generated: lax
+    presets:
+      - comments
+      - common-false-positives
+      - legacy
+      - std-error-handling
+    rules:
+      - linters:
+          - errcheck
+          - gosec
+        path: _test\.go
+      - linters:
+          - revive
+          - staticcheck
+        path: mocks/
+      - linters:
+          - revive
+          - staticcheck
+        path: user_enum\.go
+      - linters:
+          - revive
+          - staticcheck
+        path: role_enum\.go
+    paths:
+      - mocks
+      - testdata
+      - third_party$
+      - builtin$
+      - examples$
+formatters:
+  enable:
+    - gofmt
+    - goimports
+  exclusions:
+    generated: lax
+    paths:
+      - mocks
+      - testdata
+      - third_party$
+      - builtin$
+      - examples$

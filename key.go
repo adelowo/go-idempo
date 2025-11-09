@@ -8,6 +8,8 @@ import (
 
 const headerName = "Idempotency-Key"
 
+type IdempotencyKey string
+
 func KeyFromRequest(h http.Header) (IdempotencyKey, error) {
 
 	key := h.Get(headerName)
@@ -17,5 +19,3 @@ func KeyFromRequest(h http.Header) (IdempotencyKey, error) {
 
 	return IdempotencyKey(key), nil
 }
-
-type IdempotencyKey string
